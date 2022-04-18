@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { voteNay } = require('fontawesome');
+const withAuth = require('../../utils/auth')
 const { User, Post, Comment } = require('../../models');
 
 router.get('/', (req, res) => {
