@@ -66,10 +66,17 @@ router.get('/post/:id', (req, res) => {
       },
       attributes: [
         'id',
-        'content',
         'title',
+        'content',
+        'post_url',
         'created_at'
-      ],
+      
+      [
+      sequelize.literal(
+        '(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'
+      ),
+      'vote_count'],],
+
       include: [
         {
           model: Comment,
@@ -87,7 +94,7 @@ router.get('/post/:id', (req, res) => {
     })
       .then(dbPostData => {
         if (!dbPostData) {
-          res.status(404).json({ message: 'No post found with this id' });
+          res.status(404).json({ message: 'No post found' });
           return;
         }
 
@@ -111,9 +118,10 @@ router.get('/posts-comments', (req, res) => {
         },
         attributes: [
           'id',
-          'content',
-          'title',
-          'created_at'
+        'title',
+        'content',
+        'post_url',
+        'created_at'
         ],
         include: [
           {

@@ -8,10 +8,14 @@ router.get('/', (req, res) => {
     console.log('======================');
     Post.findAll({
       // Query configuration
-        attributes: ['id', 
-                    'title',
-                    'content',
-                    'created_at'
+        attributes: [  'id',
+        'title',
+        'content',
+        'post_url',
+        'created_at',
+        [sequelize.literal(
+          '(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)', 'vote_count', 
+        )]
                     ],
         order: [['created_at', 'DESC']],          
         include: [
@@ -43,10 +47,11 @@ router.get('/:id', (req, res) => {
       where: {
         id: req.params.id
       },
-      attributes: ['id', 
-                   'content',
-                   'title',
-                   'created_at'
+      attributes: ['id',
+      'title',
+      'content',
+      'post_url',
+      'created_at'
                 ],
       include: [
         {
