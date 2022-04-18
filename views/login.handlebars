@@ -1,15 +1,32 @@
-<div class="card">
-    <h3 class="card-header">New Post</h3>
-    <form class="card-body new-post-form" id="new-post-form">
-        <label for="post-title" class="form-label">Title</label>
-        <input type="text" id="post-title" name="post-title" class="form-input" />
+<form class="login-card">
+    <div>
+    <label>Username:</label>
+    <input type='text' id="username_login" />
+    </div>
+    <div>
+        <label>Password:</label>
+        <input type="password" id="password-login">
+    </div>
+    <button type="submit">Log-In</button>
+</form>
+
+<form class="signup-card">
+      <div>
+    <label>Username:</label>
+    <input type='text' id="username_login" />
+    </div>
+      <div>
+    <label>email:</label>
+    <input type='text' id="email-login" />
+    </div>
+    <div>
+        <label>Password:</label>
+        <input type="password" id="password-login">
+    </div>
+    <button type="submit">Create Account</button>
+</form>
 
 
-        <label class="form-label" for="content">Content</label>
-        <input id="content" name="content" class="form-input" />
+<script src='/javascript/login.js'></script>
 
-        <button type="submit" class="btn">Create</button>
-    </form>
-</div>
-
-<script src="/javascript/add-post.js"></script>
+<script src='/javascript/signup.js'></script>

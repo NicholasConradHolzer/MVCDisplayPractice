@@ -51,7 +51,10 @@ router.get('/:id', (req, res) => {
       'title',
       'content',
       'post_url',
-      'created_at'
+      'created_at',
+      [ sequelize.literal(
+        '(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id'
+      ),'vote_count']
                 ],
       include: [
         {
@@ -70,7 +73,7 @@ router.get('/:id', (req, res) => {
     })
       .then(dbPostData => {
         if (!dbPostData) {
-          res.status(404).json({ message: 'No post stored with this id' });
+          res.status(404).json({ message: 'No post found' });
           return;
         }
         res.json(dbPostData);
@@ -110,7 +113,7 @@ router.put('/:id', withAuth, (req, res) => {
         }
     }).then(dbPostData => {
         if (!dbPostData) {
-            res.status(404).json({ message: 'No post stored with this id' });
+            res.status(404).json({ message: 'No post found' });
             return;
         }
         res.json(dbPostData);
@@ -131,7 +134,7 @@ router.delete('/:id', withAuth, (req, res) => {
         }
     }).then(dbPostData => {
         if (!dbPostData) {
-            res.status(404).json({ message: 'No post stored with this id' });
+            res.status(404).json({ message: 'No post found' });
             return;
         }
         res.json(dbPostData);

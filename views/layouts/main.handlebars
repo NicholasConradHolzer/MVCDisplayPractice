@@ -4,31 +4,34 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tech Blog</title>
+  <title>leTech</title>
   <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
 
 <body>
   <div class="wrapper">
-      <header class="hero">
+      <header >
           <div>
             <nav class"nav">
-                    <a class="link" href="/">home</a>
-                    <a class="link" href="/dashboard">dashboard</a>
+                    <a href="/dashboard">Dashboard</a>
                     {{#if loggedIn}}
-                    <a class="link" href="/" id="logout">logout</a>
+                    <a href="/" id="logout">Logout</a>
                     {{else}}
-                    <a class="link" href="/login">login</a>
+                    <a href="/login">Login</a>
                     {{/if}}
                 </nav>          
           </div>
 
-          <h1 class="app-title"><i class="fab "></i>Tech Blog</h1>
+          
+                    <a href="/">leTech</a>
       </header>
 
     <main>
       {{{ body }}}
     </main>
+    <footer>
+      <p>brought to you from Nick's House and his less than Handlebars mustache</p>
+    </footer>
   </div>
 
     {{#if loggedIn}}

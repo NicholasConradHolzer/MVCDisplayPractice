@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const { voteNay } = require('fontawesome');
 const { User, Post, Comment } = require('../../models');
 
 router.get('/', (req, res) => {
@@ -24,10 +25,10 @@ router.get('/:id', (req, res) => {
           {
             model: Post,
             attributes: [
-                'id', 
-                'title', 
-                'content', 
-                'created_at']
+                'id',
+        'title',
+        'post_url',
+        'created_at',]
           },
           {
             model: Comment,
@@ -40,6 +41,7 @@ router.get('/:id', (req, res) => {
           {
             model: Post,
             attributes: ['title'],
+            through: Vote, as: 'voted_posts'
           }
         ]
       })
@@ -59,6 +61,7 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
     User.create({
         username: req.body.username,
+        email: req.body.email,
         password: req.body.password
     })
     .then(dbUserData => {
@@ -118,7 +121,7 @@ router.post('/logout', (req, res) => {
     }
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id', withAuth, (req, res) => {
 
     User.update(req.body, {
         individualHooks: true,
@@ -140,7 +143,7 @@ router.put('/:id', (req, res) => {
 
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', withAuth, (req, res) => {
     User.destroy({
         where: {
             id: req.params.id
