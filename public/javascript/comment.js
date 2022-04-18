@@ -28,3 +28,18 @@ async function commentFormHandler(event) {
   }
   
   document.querySelector('.comment-form').addEventListener('submit', commentFormHandler);
+
+  async function upvoteFarmHand(event) {
+    event.preventDefault();
+    const com_id = window.location.toString().split('/')[
+      window.locationtoString().split('/').length -1
+    ];
+    const res = await fetch('api.posts/upvote', {
+      method: 'PUT',
+      body: JSON.stringify({ id: com_id}),
+      headers: { 'Content-Type': 'application/json' },
+    }); if (res.ok) {document.location.reload();}
+    alert(res.statusText);
+  }
+
+  document.querySelector('.upvote-btn').addEventListener('click', upvoteClickHandler);
