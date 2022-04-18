@@ -13,6 +13,7 @@ router.get('/', withAuth, (req, res) => {
         'id',
         'title',
         'content',
+        'post_url',
         'created_at'
       ],
       include: [
@@ -49,7 +50,9 @@ router.get('/edit/:id', withAuth, (req, res) => {
         attributes: ['id', 
                      'title',
                      'content',
-                     'created_at'
+                     'content',
+                      'post_url',
+                        'created_at'
                   ],
         include: [
           {
@@ -72,7 +75,7 @@ router.get('/edit/:id', withAuth, (req, res) => {
             return;
           }
             const post = dbPostData.get({ plain: true });
-            res.render('edit-post', {post, loggedIn: true});
+            res.render('edit-post', {post, loggedIn: req.session.loggedIn});
         })
         .catch(err => {
           console.log(err);

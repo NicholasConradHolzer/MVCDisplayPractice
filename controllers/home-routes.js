@@ -1,6 +1,7 @@
+
+const router = require('express').Router();
 const sequelize = require('../config/connection');
 const { Post, User, Comment } = require('../models');
-const router = require('express').Router();
 
 
 router.get('/', (req, res) => {
@@ -9,8 +10,17 @@ router.get('/', (req, res) => {
         'id',
         'title',
         'content',
+        'post_url',
         'created_at'
       ],
+
+      /*
+      'id',
+        'title',
+        'content',
+        'post_url',
+        'created_at'
+      */
       include: [
         {
           model: Comment,
